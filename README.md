@@ -52,7 +52,7 @@ This is a full-stack URL shortener application that allows users to create short
 
 1. Clone the repository
 ```bash
-git clone [https://github.com/Cr-Israel/Shortener-URL]
+git clone https://github.com/Cr-Israel/Shortener-URL
 cd short-url
 ```
 
@@ -82,5 +82,5 @@ pnpm dev
 ISC
 
 ## Author
-[Carlos Israel]
+Carlos Israel
 
