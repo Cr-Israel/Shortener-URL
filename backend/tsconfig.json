@@ -3,14 +3,19 @@
   "display": "Node LTS (22)",
   "_version": "22.0.0",
   "compilerOptions": {
-    "lib": [
-      "es2023"
-    ],
+    "lib": ["es2023"],
     "module": "node16",
     "target": "es2022",
+    "types": ["vitest/globals"],
+    "baseUrl": "./",
+
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "moduleResolution": "node16"
+    "moduleResolution": "node16",
+
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }
