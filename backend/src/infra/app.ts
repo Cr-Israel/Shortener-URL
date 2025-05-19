@@ -1,8 +1,8 @@
 import { ZodError } from "zod";
 import { fastify } from "fastify";
 import { fastifyCors } from "@fastify/cors";
-import { shortenRoutes } from "./routes/shorten";
-import { env } from "./env/env";
+import { shortenRoutes } from "./infra/routes/shorten";
+import { env } from "./infra/env/env";
 // import { fastifySwagger } from "@fastify/swagger";
 // import { fastifySwaggerUi } from "@fastify/swagger-ui";
 
