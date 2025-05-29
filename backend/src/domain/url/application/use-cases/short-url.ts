@@ -6,7 +6,6 @@ import { UrlRepository } from "../repositories/url-repository"
 
 export interface RegisterUrlUseCaseRequest {
     userId: string
-    shortId: string
     original: string
 }
 
@@ -24,11 +23,9 @@ export class RegisterUrlUseCase {
 
     async execute({
         userId,
-        shortId,
         original
     }: RegisterUrlUseCaseRequest): Promise<RegisterUrlUseCaseResponse> {
-        // const shortenedId = Math.random().toString(36).substr(2, 5)
-        shortId = Math.random().toString(36).substr(2, 5)
+        const shortId = Math.random().toString(36).substr(2, 5)
 
         const url = Url.create({
             userId: new UniqueEntityID(userId),
