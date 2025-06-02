@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { FastifyReply, FastifyRequest } from "fastify";
-import { prisma } from "../lib/prisma";
+import { prisma } from "../database/prisma";
 
 export async function shortenUrl(request: FastifyRequest, reply: FastifyReply) {
     const bodySchema = z.object({
