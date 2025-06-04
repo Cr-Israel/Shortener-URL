@@ -37,6 +37,8 @@ describe('Register Url Use Case', () => {
                 })
             })
         })
+
+        expect(inMemoryUrlRepository.items).toHaveLength(1)
     })
 
     it('should not be able to shorten url that has not expired yet', async () => {

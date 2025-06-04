@@ -7,9 +7,13 @@ export class InMemoryUrlRepository implements UrlRepository {
   async create(url: Url): Promise<void> {
     this.items.push(url)
   }
-
+  
   async findByOriginal(original: string): Promise<Url | null> {
     return this.items.find(url => url.original === original) ?? null
+  }
+
+  async findByShortId(shortId: string): Promise<Url | null> {
+    return this.items.find(url => url.shortId === shortId) ?? null
   }
 
   async delete(url: Url): Promise<void> {
