@@ -7,6 +7,7 @@ export interface UrlProps {
     shortId: string
     original: string
     createdAt: Date
+    expiresAt: Date
 }
 
 export class Url extends Entity<UrlProps> {
@@ -26,13 +27,21 @@ export class Url extends Entity<UrlProps> {
         return this.props.createdAt
     }
 
+    get expiresAt() {
+        return this.props.expiresAt
+    }
+
     static create(
-        props: Optional<UrlProps, "createdAt">,
+        props: Optional<UrlProps, "createdAt" | "expiresAt">,
         id?: UniqueEntityID
     ) {
+        const now = new Date()
+        const expiresInMs = 1000 * 60 * 60 * 24 // 24 horas
+
         const url = new Url({
             ...props,
-            createdAt: props.createdAt ?? new Date()
+            createdAt: props.createdAt ?? new Date(),
+            expiresAt: props.expiresAt ?? new Date(now.getTime() + expiresInMs)
         },
             id
         )
