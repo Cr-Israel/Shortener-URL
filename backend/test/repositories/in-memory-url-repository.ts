@@ -1,3 +1,5 @@
+import { UniqueEntityID } from "@/core/entities/unique-entity-id"
+
 import { Url } from "@/domain/url/enterprise/entities/url"
 import { UrlRepository } from "@/domain/url/application/repositories/url-repository"
 
@@ -14,6 +16,12 @@ export class InMemoryUrlRepository implements UrlRepository {
 
   async findByShortId(shortId: string): Promise<Url | null> {
     return this.items.find(url => url.shortId === shortId) ?? null
+  }
+
+  async fetchUrlsByUserId(userId: string): Promise<Url[]> {
+    const urls = this.items.filter(item => item.userId.equals(new UniqueEntityID(userId)))
+
+    return urls
   }
 
   async delete(url: Url): Promise<void> {
