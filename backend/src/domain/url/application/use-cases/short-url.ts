@@ -7,19 +7,19 @@ import { ShortIdGenerator } from "../shortener/short-id-generator"
 
 import { UrlAlreadyShortenerError } from "./errors/url-already-shortener-error"
 
-export interface RegisterUrlUseCaseRequest {
+export interface ShortUrlUseCaseRequest {
     userId: string
     original: string
 }
 
-export type RegisterUrlUseCaseResponse = Either<
+export type ShortUrlUseCaseResponse = Either<
     UrlAlreadyShortenerError,
     {
         url: Url
     }
 >
 
-export class RegisterUrlUseCase {
+export class ShortUrlUseCase {
     constructor(
         private urlRepository: UrlRepository,
         private shortIdGenerator: ShortIdGenerator
@@ -28,7 +28,7 @@ export class RegisterUrlUseCase {
     async execute({
         userId,
         original
-    }: RegisterUrlUseCaseRequest): Promise<RegisterUrlUseCaseResponse> {
+    }: ShortUrlUseCaseRequest): Promise<ShortUrlUseCaseResponse> {
         const existing = await this.urlRepository.findByOriginal(original)
 
         if (existing) {

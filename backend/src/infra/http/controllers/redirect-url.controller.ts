@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { prisma } from "../database/prisma";
+import { prisma } from "../../database/prisma";
 
 export async function redirectUrl(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.params as { id: string };

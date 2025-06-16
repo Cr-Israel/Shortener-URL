@@ -1,3 +1,3 @@
 export interface ShortIdGenerator {
-  generate(): string
+  generate(): Promise<string>
 }

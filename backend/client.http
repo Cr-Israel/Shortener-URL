@@ -1,0 +1,28 @@
+@host = localhost
+@port = 3333
+@baseUrl = http://localhost:3333
+@authToken = {{authenticate.response.body.access_token}}
+
+# @name test
+GET {{baseUrl}}/ping HTTP/1.1
+
+###
+# @name create_user
+POST {{baseUrl}}/user HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "John",
+  "email": "johndoe@teste.com",
+  "password": "123456"
+}
+
+###
+# @name authenticate
+POST {{baseUrl}}/sessions HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "johndoe@teste.com",
+  "password": "123456"
+}

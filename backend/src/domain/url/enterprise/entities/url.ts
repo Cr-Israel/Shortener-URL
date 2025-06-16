@@ -1,13 +1,13 @@
 import { Entity } from "@/core/entities/entity";
-import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 import { Optional } from "@/core/types/optional";
+import { UniqueEntityID } from "@/core/entities/unique-entity-id";
 
 export interface UrlProps {
     userId: UniqueEntityID
     shortId: string
     original: string
-    createdAt: Date
     expiresAt: Date
+    createdAt: Date
 }
 
 export class Url extends Entity<UrlProps> {
@@ -23,12 +23,12 @@ export class Url extends Entity<UrlProps> {
         return this.props.original
     }
 
-    get createdAt() {
-        return this.props.createdAt
-    }
-
     get expiresAt() {
         return this.props.expiresAt
+    }
+
+    get createdAt() {
+        return this.props.createdAt
     }
 
     static create(

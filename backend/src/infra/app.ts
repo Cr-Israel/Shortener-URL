@@ -1,31 +1,35 @@
 import { ZodError } from "zod";
 import { fastify } from "fastify";
 import { fastifyCors } from "@fastify/cors";
-import { shortenRoutes } from "./infra/routes/shorten";
-import { env } from "./infra/env/env";
-// import { fastifySwagger } from "@fastify/swagger";
-// import { fastifySwaggerUi } from "@fastify/swagger-ui";
+import { fastifySwagger } from "@fastify/swagger";
+import { fastifySwaggerUi } from "@fastify/swagger-ui";
 
-// import { jsonSchemaTransform, serializerCompiler, validatorCompiler, ZodTypeProvider } from "fastify-type-provider-zod";
+import { env } from "./env/env";
+import { shortenRoutes } from "./http/routes/shorten";
+import { userRoutes } from "./http/routes/user";
 
+import { jsonSchemaTransform, serializerCompiler, validatorCompiler, ZodTypeProvider } from "fastify-type-provider-zod";
 
-export const app = fastify()
+export const app = fastify().withTypeProvider<ZodTypeProvider>()
+
+app.setValidatorCompiler(validatorCompiler)
+app.setSerializerCompiler(serializerCompiler)
 
 app.register(fastifyCors, { origin: "*" })
 
-// app.register(fastifySwagger, {
-//   openapi: {
-//     info: {
-//       title: 'Typed VUTTR API',
-//       version: '1.0.0'
-//     }
-//   },
-//   transform: jsonSchemaTransform
-// })
+app.register(fastifySwagger, {
+  openapi: {
+    info: {
+      title: 'URL Shortener',
+      version: '1.0.0'
+    }
+  },
+  transform: jsonSchemaTransform
+})
 
-// app.register(fastifySwaggerUi, {
-//   routePrefix: '/docs',
-// })
+app.register(fastifySwaggerUi, {
+  routePrefix: '/docs',
+})
 
 // Routes 👇🏻
 app.get('/ping', () => {
@@ -33,6 +37,7 @@ app.get('/ping', () => {
 })
 
 app.register(shortenRoutes)
+app.register(userRoutes)
 
 
 app.setErrorHandler((error, _, reply) => {
